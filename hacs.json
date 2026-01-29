@@ -1,11 +1,5 @@
 {
-  "name": "ASKU Uzbekistan Utilities",
-  "domain": "askuuz",
-  "category": "integration",
-  "codeowners": ["@lavalex2003"],
+  "name": "askuuz",
   "content_in_root": false,
-  "documentation": "https://github.com/lavalex2003/askuuz",
-  "homeassistant": "2023.6.0",
-  "issues": "https://github.com/lavalex2003/askuuz/issues",
-  "render_readme": true
+  "country": ["UZ"]
 }
