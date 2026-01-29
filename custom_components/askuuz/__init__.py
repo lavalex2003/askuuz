@@ -12,6 +12,8 @@ from .water.coordinator import WaterDataUpdateCoordinator
 from .tbo.coordinator import TboDataUpdateCoordinator
 from .management.coordinator import ManagementDataUpdateCoordinator
 
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+
 SERVICE_REFRESH_DATA = "refresh_data"
 
 REFRESH_DATA_SCHEMA = vol.Schema(
