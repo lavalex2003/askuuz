@@ -44,19 +44,6 @@
     }
   },
 
-  "service": {
-    "refresh_data": {
-      "name": "Обновить данные",
-      "description": "Обновить данные по счётам утилит",
-      "fields": {
-        "entry_id": {
-          "name": "ID конфигурации",
-          "description": "ID конфигурации для обновления. Если не указан, обновит все конфигурации"
-        }
-      }
-    }
-  },
-
   "entity": {
     "sensor": {
       "consumption": {
