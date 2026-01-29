@@ -1,14 +1,12 @@
 {
   "domain": "askuuz",
   "name": "ASKU Uzbekistan Utilities",
-  "codeowners": [
-    "@lavalex2003"
-  ],
+  "codeowners": ["@lavalex2003"],
   "config_flow": true,
   "documentation": "https://github.com/lavalex2003/askuuz",
   "issue_tracker": "https://github.com/lavalex2003/askuuz/issues",
   "iot_class": "cloud_polling",
+  "min_version": "2023.6.0",
   "requirements": [],
-  "version": "1.0.0",
-  "homeassistant": "2023.6.0"
+  "version": "1.0.0"
 }
