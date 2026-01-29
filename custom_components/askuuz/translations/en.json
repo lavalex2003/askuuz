@@ -44,19 +44,6 @@
     }
   },
 
-  "service": {
-    "refresh_data": {
-      "name": "Refresh data",
-      "description": "Refresh utility account data",
-      "fields": {
-        "entry_id": {
-          "name": "Configuration ID",
-          "description": "ID of configuration to refresh. If not specified, will refresh all configurations"
-        }
-      }
-    }
-  },
-
   "entity": {
     "sensor": {
       "consumption": {
