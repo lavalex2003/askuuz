@@ -1,0 +1,8 @@
+refresh_data:
+  name: Refresh data
+  description: Refresh utility account data
+  fields:
+    entry_id:
+      name: Configuration ID
+      description: ID of configuration to refresh. If not specified, refreshes all configurations.
+      example: "abcd1234"
