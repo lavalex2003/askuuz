@@ -1,0 +1,74 @@
+{
+  "title": "ASKU O‘zbekiston Kommunal Xizmatlari",
+
+  "config": {
+    "step": {
+      "user": {
+        "title": "Xizmatni tanlash",
+        "data": {
+          "service": "Xizmat"
+        }
+      },
+      "credentials": {
+        "title": "Kirish ma’lumotlari",
+        "data": {
+          "username": "Login",
+          "password": "Parol",
+          "account_id": "Shaxsiy hisob",
+          "enable_gas": "Gaz ta’minotini qo‘shish"
+        }
+      },
+      "gas": {
+        "title": "Gaz ta’minoti",
+        "data": {
+          "gas_account_id": "Gaz shaxsiy hisobi"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Login yoki parol noto‘g‘ri",      "already_configured": "Ushbu xizmat, login va shaxsiy hisob bilan konfiguratsiya allaqachon mavjud",      "invalid_gas_account": "Gaz shaxsiy hisobi noto‘g‘ri",
+      "unknown": "Noma’lum xatolik"
+    }
+  },
+
+  "selector": {
+    "service": {
+      "options": {
+        "electricity": "Elektr energiyasi",
+        "water": "Suv ta’minoti",
+        "tbo": "Chiqindi olib chiqish",
+        "management": "Boshqaruv kompaniyasi"
+      }
+    }
+  },
+
+  "service": {
+    "refresh_data": {
+      "name": "Ma'lumotlarni yangilash",
+      "description": "Kommunal hisoblarning ma'lumotlarini yangilash",
+      "fields": {
+        "entry_id": {
+          "name": "Konfiguratsiya ID",
+          "description": "Yangilash uchun konfiguratsiya ID. Agar ko'rsatilmasa, barcha konfiguratsiyalarni yangilaydi"
+        }
+      }
+    }
+  },
+
+  "entity": {
+    "sensor": {
+      "consumption": {
+        "name": "Iste’mol"
+      },
+      "accrual": {
+        "name": "Hisoblangan"
+      },
+      "balance": {
+        "name": "Balans"
+      }    },
+    "button": {
+      "refresh_data": {
+        "name": "Ma'lumotlarni yangilash"
+      }    }
+  }
+}

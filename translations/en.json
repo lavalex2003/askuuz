@@ -1,0 +1,76 @@
+{
+  "title": "ASKU Uzbekistan Utilities",
+
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select service",
+        "data": {
+          "service": "Service"
+        }
+      },
+      "credentials": {
+        "title": "Login details",
+        "data": {
+          "username": "Username",
+          "password": "Password",
+          "account_id": "Account ID",
+          "enable_gas": "Enable gas supply"
+        }
+      },
+      "gas": {
+        "title": "Gas supply",
+        "data": {
+          "gas_account_id": "Gas account ID"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid username or password",
+      "already_configured": "Configuration with this service, username and account ID already exists",
+      "invalid_gas_account": "Invalid gas account ID",
+      "unknown": "Unknown error"
+    }
+  },
+
+  "selector": {
+    "service": {
+      "options": {
+        "electricity": "Electricity",
+        "water": "Water supply",
+        "tbo": "Waste removal",
+        "management": "Management company"
+      }
+    }
+  },
+
+  "service": {
+    "refresh_data": {
+      "name": "Refresh data",
+      "description": "Refresh utility account data",
+      "fields": {
+        "entry_id": {
+          "name": "Configuration ID",
+          "description": "ID of configuration to refresh. If not specified, will refresh all configurations"
+        }
+      }
+    }
+  },
+
+  "entity": {
+    "sensor": {
+      "consumption": {
+        "name": "Consumption"
+      },
+      "accrual": {
+        "name": "Accrued"
+      },
+      "balance": {
+        "name": "Balance"
+      }    },
+    "button": {
+      "refresh_data": {
+        "name": "Refresh data"
+      }    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "title": "ASKU Uzbekistan Utilities",
+
+  "config": {
+    "step": {
+      "user": {
+        "title": "Выбор услуги",
+        "data": {
+          "service": "Услуга"
+        }
+      },
+      "credentials": {
+        "title": "Данные для входа",
+        "data": {
+          "username": "Логин",
+          "password": "Пароль",
+          "account_id": "Лицевой счёт",
+          "enable_gas": "Получать данные по газу"
+        }
+      },
+      "gas": {
+        "title": "Газоснабжение",
+        "data": {
+          "gas_account_id": "Лицевой счёт газа"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Неверный логин или пароль",
+      "already_configured": "Запись с такой услугой, логином и лицевым счётом уже существует",
+      "invalid_gas_account": "Неверный лицевой счёт газа",
+      "unknown": "Неизвестная ошибка"
+    }
+  },
+
+  "selector": {
+    "service": {
+      "options": {
+        "electricity": "Энергоснабжение",
+        "water": "Водоснабжение",
+        "tbo": "Вывоз ТБО",
+        "management": "Управляющая компания"
+      }
+    }
+  },
+
+  "service": {
+    "refresh_data": {
+      "name": "Обновить данные",
+      "description": "Обновить данные по счётам утилит",
+      "fields": {
+        "entry_id": {
+          "name": "ID конфигурации",
+          "description": "ID конфигурации для обновления. Если не указан, обновит все конфигурации"
+        }
+      }
+    }
+  },
+
+  "entity": {
+    "sensor": {
+      "consumption": {
+        "name": "Показатели"
+      },
+      "accrual": {
+        "name": "Начислено"
+      },
+      "balance": {
+        "name": "Баланс"
+      }
+    },
+    "button": {
+      "refresh_data": {
+        "name": "Обновить данные"
+      }
+    }
+  }
+}

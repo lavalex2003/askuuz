@@ -1,0 +1,83 @@
+from __future__ import annotations
+
+from homeassistant.components.sensor import (
+    SensorEntity,
+    SensorDeviceClass,
+)
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+from .coordinator import TboDataUpdateCoordinator
+from ..const import DOMAIN
+
+
+SENSORS = {
+    "consumption": {
+        "unit": "people",
+    },
+    "accrual": {
+        "device_class": SensorDeviceClass.MONETARY,
+        "unit": "UZS",
+    },
+    "balance": {
+        "device_class": SensorDeviceClass.MONETARY,
+        "unit": "UZS",
+        "attrs": True,
+    },
+}
+
+
+async def async_setup_entry(hass, entry: ConfigEntry, async_add_entities) -> None:
+    coordinator: TboDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
+    account_id = coordinator.data["account_id"]
+
+    device_info = DeviceInfo(
+        identifiers={(DOMAIN, f"tbo_{account_id}")},
+        name=f"ASKU UZ TBO {account_id}",
+        manufacturer="ASKU UZ",
+        model="TBO",
+    )
+
+    entities = [
+        ASKUTboSensor(
+            coordinator,
+            device_info,
+            key,
+            cfg,
+        )
+        for key, cfg in SENSORS.items()
+    ]
+
+    async_add_entities(entities, update_before_add=False)
+
+
+class ASKUTboSensor(
+    CoordinatorEntity[TboDataUpdateCoordinator],
+    SensorEntity,
+):
+    _attr_has_entity_name = True
+
+    def __init__(self, coordinator, device_info, key, cfg):
+        super().__init__(coordinator)
+
+        self._key = key
+        self._with_attrs = cfg.get("attrs", False)
+
+        self._attr_translation_key = key
+        self._attr_device_class = cfg.get("device_class")
+        self._attr_native_unit_of_measurement = cfg.get("unit")
+
+        account_id = coordinator.data["account_id"]
+        self._attr_unique_id = f"{DOMAIN}_tbo_{account_id}_{key}"
+        self._attr_device_info = device_info
+
+    @property
+    def native_value(self):
+        return self.coordinator.data.get(self._key)
+
+    @property
+    def extra_state_attributes(self):
+        if not self._with_attrs:
+            return None
+        return self.coordinator.data
