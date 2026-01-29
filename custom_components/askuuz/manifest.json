@@ -4,9 +4,9 @@
   "codeowners": ["@lavalex2003"],
   "config_flow": true,
   "documentation": "https://github.com/lavalex2003/askuuz",
-  "issue_tracker": "https://github.com/lavalex2003/askuuz/issues",
+  "integration_type": "service",
   "iot_class": "cloud_polling",
-  "min_version": "2023.6.0",
+  "issue_tracker": "https://github.com/lavalex2003/askuuz/issues",
   "requirements": [],
   "version": "1.0.0"
 }
