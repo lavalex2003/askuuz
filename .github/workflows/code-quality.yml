@@ -1,0 +1,156 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint Code
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 black isort
+    
+    - name: Check code formatting with black
+      run: black --check custom_components/askuuz --line-length=100
+      continue-on-error: true
+    
+    - name: Check import ordering with isort
+      run: isort --check-only custom_components/askuuz
+      continue-on-error: true
+    
+    - name: Lint with flake8
+      run: |
+        flake8 custom_components/askuuz \
+          --count \
+          --select=E9,F63,F7,F82 \
+          --show-source \
+          --statistics \
+          --max-line-length=100
+        flake8 custom_components/askuuz \
+          --count \
+          --exit-zero \
+          --max-line-length=100 \
+          --statistics
+
+  validate-manifest:
+    runs-on: ubuntu-latest
+    name: Validate manifest.json
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install Home Assistant validator
+      run: pip install homeassistant-stubs
+    
+    - name: Validate manifest.json
+      run: |
+        python << 'EOF'
+        import json
+        import sys
+        
+        try:
+            with open('custom_components/askuuz/manifest.json') as f:
+                manifest = json.load(f)
+            
+            required_fields = [
+                'domain',
+                'name',
+                'codeowners',
+                'config_flow',
+                'documentation',
+                'issue_tracker',
+                'requirements',
+                'version',
+                'homeassistant'
+            ]
+            
+            missing = [f for f in required_fields if f not in manifest]
+            if missing:
+                print(f"❌ Missing fields: {missing}")
+                sys.exit(1)
+            
+            print("✅ manifest.json is valid")
+        except json.JSONDecodeError as e:
+            print(f"❌ Invalid JSON: {e}")
+            sys.exit(1)
+        EOF
+
+  translations:
+    runs-on: ubuntu-latest
+    name: Validate translations
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Validate JSON translations
+      run: |
+        python << 'EOF'
+        import json
+        import os
+        
+        trans_dir = 'custom_components/askuuz/translations'
+        for lang_file in os.listdir(trans_dir):
+            if lang_file.endswith('.json'):
+                path = os.path.join(trans_dir, lang_file)
+                try:
+                    with open(path) as f:
+                        data = json.load(f)
+                    print(f"✅ {lang_file} is valid")
+                except json.JSONDecodeError as e:
+                    print(f"❌ {lang_file} is invalid: {e}")
+                    exit(1)
+        EOF
+
+  python-tests:
+    runs-on: ubuntu-latest
+    name: Python Tests
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-asyncio pytest-cov
+        pip install homeassistant aiohttp
+    
+    - name: Run tests
+      run: pytest tests/ -v --tb=short
+      continue-on-error: true
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+      continue-on-error: true
