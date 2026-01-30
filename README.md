@@ -301,12 +301,6 @@ askuuz/
 - ✓ Версия Home Assistant
 - ✗ Ваши личные данные и учётные данные
 
-## 🔗 Ссылки
-
-- **Портал ASKU**: https://asku.uz
-- **Home Assistant**: https://www.home-assistant.io
-- **Документация Home Assistant**: https://developers.home-assistant.io
-
 ## 📝 История версий
 
 ### v1.0.0 (2026-01-30)
